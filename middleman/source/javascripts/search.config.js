@@ -12,6 +12,8 @@ $(window).ready(function() {
 
   var platformRemoverRegexp = /\b(platform|on\:\w+\s?)+/;
   var platformSelect = $("#search_results div.platform");
+  
+  var sortingSelect = $("#search_results div.sorting");
 
   var allocationSelect = $('#search_results div.allocations');
   var resultsContainer = $('#results_container');
@@ -268,7 +270,8 @@ $(window).ready(function() {
     // Before a query is run, we add a few params.
     //
     beforeParams: function(params) {
-      params['sort'] = 'popularity'; // TODO @orta - have fun with this!
+      selectedValue = sortingSelect.find('option:selected').val();
+      params['sort'] = selectedValue;
       return params;
     },
     // Before Picky sends any data to the server.
@@ -548,6 +551,14 @@ $(window).ready(function() {
     trackPlatformSelection();
     pickyClient.resend();
     selectCheckedPlatform();
+  });
+  
+  // Resend query on sorting selection.
+  //
+  // Note: Also updates the label & tracks.
+  //
+  sortingSelect.bind('change', function(event) {
+    pickyClient.resend();
   });
 
   // Make all clicks in the search container set focus.

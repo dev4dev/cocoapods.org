@@ -2,13 +2,27 @@
   .selection
     .platform
       input value="" type="radio" id="platform_either" name="platform" checked==(!@platform || @platform == :either)
-      label class="left" for="platform_either" <span>OSX or iOS</span>
+      label class="left" for="platform_either" <span>Either</span>
       input value="on:osx on:ios" type="radio" id="platform_both" name="platform" checked==(@platform == :both)
-      label class="middle" for="platform_both" <span>iOS and OSX</span>
+      label class="middle" for="platform_both" <span>Both</span>
       input value="on:ios" type="radio" id="platform_ios" name="platform" checked==(@platform == :ios)
       label class="middle" for="platform_ios" <span>iOS</span>
       input value="on:osx" type="radio" id="platform_osx" name="platform" checked==(@platform == :osx)
       label class="right" for="platform_osx" <span>OSX</span>
+  
+    .sorting
+      select
+        option value="popularity" selected="selected" popularity
+        option value="-popularity" unpopularity
+        option value="name" A-Z
+        option value="contributors" contributors
+        option value="-contributors" lone wolf
+        option value="forks" forks
+        option value="-forks" unforked
+        option value="stars" stars
+        option value="-stars" starless
+        option value="watchers" watchers  
+        option value="-watchers" ignored
   
     .allocations
       ol.shown
